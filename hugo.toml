@@ -1,0 +1,26 @@
+baseURL = "https://foolwei-code.github.io/"
+languageCode = 'zh-cn'
+title = "Konger's blog"
+theme = 'github-style'
+pygmentsCodeFences = true
+pygmentsUseClasses = true
+
+[params]
+  author = 'Konger'
+  description = 'In solitude, where we are least alone.'
+  github = 'foolwei-code'
+  email = '3288529254@qq.com'
+  url = 'https://foolwei.com/'
+  keywords = 'blog, google analytics'
+  rss = true
+  lastmod = true
+  avatar = '/images/avatar.png'
+  headerIcon = "/images/page.png"
+  location = 'China'
+  enableGitalk = true
+  custom_css = ["css/custom.css"]
+  custom_js = ["js/custom.js"]
+
+ [caches]
+  [caches.images]
+    dir = ':cacheDir/images'
