@@ -23,7 +23,7 @@
     
     <meta
   name="description"
-  content="MySQL programming for c&#43;&#43;"
+  content="MySQL Programming For C&#43;&#43;"
 />
 <meta
   name="keywords"
@@ -40,7 +40,7 @@
 />
 <meta
   name="twitter:description"
-  content="MySQL programming for c&#43;&#43;"
+  content="MySQL Programming For C&#43;&#43;"
 />
 <meta name="twitter:site" content="http://localhost:1313/" />
 <meta name="twitter:creator" content="" />
@@ -60,7 +60,7 @@
 />
 <meta
   property="og:description"
-  content="MySQL programming for c&#43;&#43;"
+  content="MySQL Programming For C&#43;&#43;"
 />
 <meta property="og:url" content="http://localhost:1313/post/mysql/" />
 <meta property="og:site_name" content="MySQL" />
@@ -205,7 +205,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      0 Words
+                      562 Words
                     
 
                   </div>
@@ -217,7 +217,141 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"></article>
+                <article class="markdown-body entry-content container-lg"><h1 id="mysql-programming-for-c">MySQL Programming For C++</h1>
+<h2 id="1preparation-of-the-development-environment">1.Preparation of the development environment</h2>
+<h3 id="1install-mysql-server">1.Install MySQL Server</h3>
+<ul>
+<li>确保已安装 MySQL Server，并创建测试数据库和用户</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">testdb</span><span class="p">;</span><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;testuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="k">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;123456&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;testuser&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></div><h3 id="2install-mysql-client">2.Install MySQL Client</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 对于Ubuntu系统</span>
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install libmysqlclient-dev
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#对于CentOS系统</span>
+</span></span><span class="line"><span class="cl">sudo yum install mysql-devel
+</span></span></code></pre></div><h2 id="2the-basic-process-of-connecting-to-mysql-in-c">2.The basic process of connecting to MySQL in C++</h2>
+<p>MySQL 官方提供的是 <strong>C API</strong>，C++ 可直接调用：</p>
+<blockquote>
+<p>初始化 → 连接 → 执行 SQL → 处理结果 → 释放资源</p>
+</blockquote>
+<h2 id="3core-api-description">3.Core API Description</h2>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: center"><strong>函数</strong></th>
+          <th style="text-align: center"><strong>作用</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center"><code>mysql_init()</code></td>
+          <td style="text-align: center">初始化 MYSQL 对象</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>mysql_real_connect()</code></td>
+          <td style="text-align: center">连接数据库</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>mysql_query()</code></td>
+          <td style="text-align: center">执行 SQL</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>mysql_store_result()</code></td>
+          <td style="text-align: center">获取查询结果</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>mysql_fetch_row()</code></td>
+          <td style="text-align: center">读取一行数据</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>mysql_free_result()</code></td>
+          <td style="text-align: center">释放结果集</td>
+      </tr>
+      <tr>
+          <td style="text-align: center"><code>mysql_close()</code></td>
+          <td style="text-align: center">关闭连接</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="4encapsulate-a-mysql-client">4.Encapsulate a MySQL client</h2>
+<h3 id="1head-file">1.Head File</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#pragma once
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;mysql/mysql.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 封装一个MySQL的客户端
+</span></span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MySQLClient</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">MySQLClient</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="o">~</span><span class="n">MySQLClient</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 进行连接
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">connect</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">host</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">user</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">pass</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">db</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">port</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">                   <span class="mi">3306</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 判断是否连接成功
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">isConnected</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 执行mysql的增删改语句
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">execute</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 执行mysql中的查询语句
+</span></span></span><span class="line"><span class="cl">  <span class="n">MYSQL_RES</span> <span class="o">*</span><span class="nf">query</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 获取最后一次插入的数据的主键id
+</span></span></span><span class="line"><span class="cl">  <span class="kt">int64_t</span> <span class="nf">lastInsertId</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 进行字符串的安全转义
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">escape</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">MYSQL</span> <span class="o">*</span><span class="n">conn_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h3 id="2source-file">2.Source File</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;MySQLClient.hpp&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;cstring&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="n">MySQLClient</span><span class="o">::</span><span class="n">MySQLClient</span><span class="p">()</span> <span class="o">:</span> <span class="n">conn_</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 释放连接资源
+</span></span></span><span class="line"><span class="cl"><span class="n">MySQLClient</span><span class="o">::~</span><span class="n">MySQLClient</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">conn_</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mysql_close</span><span class="p">(</span><span class="n">conn_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 进行连接
+</span></span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">MySQLClient</span><span class="o">::</span><span class="n">connect</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">host</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">user</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">pass</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">db</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="kt">unsigned</span> <span class="kt">short</span> <span class="n">port</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 设置连接资源
+</span></span></span><span class="line"><span class="cl">  <span class="n">conn_</span> <span class="o">=</span> <span class="n">mysql_init</span><span class="p">(</span><span class="k">nullptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">conn_</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 设置字符集的编码方式为utif8mb4
+</span></span></span><span class="line"><span class="cl">  <span class="n">mysql_options</span><span class="p">(</span><span class="n">conn_</span><span class="p">,</span> <span class="n">MYSQL_SET_CHARSET_NAME</span><span class="p">,</span> <span class="s">&#34;utf8mb4&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 与服务器建立连接
+</span></span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">mysql_real_connect</span><span class="p">(</span><span class="n">conn_</span><span class="p">,</span> <span class="n">host</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">user</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">pass</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">db</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">port</span><span class="p">,</span> <span class="k">nullptr</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 确认连接是否成功建立
+</span></span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">MySQLClient</span><span class="o">::</span><span class="n">isConnected</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">conn_</span> <span class="o">!=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 执行mysql的增删改语句
+</span></span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">MySQLClient</span><span class="o">::</span><span class="n">execute</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">mysql_query</span><span class="p">(</span><span class="n">conn_</span><span class="p">,</span> <span class="n">sql</span><span class="p">.</span><span class="n">c_str</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 执行查询语句
+</span></span></span><span class="line"><span class="cl"><span class="n">MYSQL_RES</span> <span class="o">*</span><span class="n">MySQLClient</span><span class="o">::</span><span class="n">query</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">sql</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">mysql_query</span><span class="p">(</span><span class="n">conn_</span><span class="p">,</span> <span class="n">sql</span><span class="p">.</span><span class="n">c_str</span><span class="p">()))</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">mysql_store_result</span><span class="p">(</span><span class="n">conn_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 获取最后一次插入的数据的主键id
+</span></span></span><span class="line"><span class="cl"><span class="kt">int64_t</span> <span class="n">MySQLClient</span><span class="o">::</span><span class="n">lastInsertId</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">mysql_insert_id</span><span class="p">(</span><span class="n">conn_</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 进行字符串的安全转义
+</span></span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">MySQLClient</span><span class="o">::</span><span class="n">escape</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">str</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="o">*</span><span class="n">buf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">char</span><span class="p">[</span><span class="n">str</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="n">mysql_real_escape_string</span><span class="p">(</span><span class="n">conn_</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="n">str</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">str</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">res</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">delete</span><span class="p">[]</span> <span class="n">buf</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></article>
               </div>
             </div>
           </div>

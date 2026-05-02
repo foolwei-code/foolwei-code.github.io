@@ -13,21 +13,7 @@
       <link>http://localhost:1313/post/mysql/</link>
       <pubDate>Sat, 02 May 2026 14:48:57 +0800</pubDate>
       <guid>http://localhost:1313/post/mysql/</guid>
-      <description>MySQL programming for c++</description>
-    </item>
-    <item>
-      <title>Qt</title>
-      <link>http://localhost:1313/post/qt/</link>
-      <pubDate>Fri, 01 May 2026 16:05:58 +0800</pubDate>
-      <guid>http://localhost:1313/post/qt/</guid>
-      <description>this is my Qt blog</description>
-    </item>
-    <item>
-      <title>Title_of_the_post</title>
-      <link>http://localhost:1313/post/title_of_the_post/</link>
-      <pubDate>Wed, 29 Apr 2026 22:49:03 +0800</pubDate>
-      <guid>http://localhost:1313/post/title_of_the_post/</guid>
-      <description>this is my first blog</description>
+      <description>MySQL Programming For C++</description>
     </item>
   </channel>
 </rss>
