@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="application/javascript" src='http://localhost:1313/js/theme-mode.js'></script>
+    <link rel="stylesheet" href='http://localhost:1313/css/frameworks.min.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/github.min.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/github-style.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/light.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/dark.css' />
+    <link rel="stylesheet" href='http://localhost:1313/css/syntax.css' />
+    <title>Redis - Konger&#39;s blog</title>
+    
+    <link rel="icon" type="image/x-icon" href='http://localhost:1313/images/favicon.ico'>
+    
+    <meta name="theme-color" content="#1e2327">
+
+    <link rel="stylesheet" href="http://localhost:1313/css/custom.css">
+    <script type="text/javascript" src="http://localhost:1313/js/custom.js"></script>
+    
+
+    
+    <meta
+  name="description"
+  content="Redis Programming For C&#43;&#43;"
+/>
+<meta
+  name="keywords"
+  content='blog, google analytics'
+/>
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="http://localhost:1313/post/redis/" />
+
+
+<meta name="twitter:card" content="summary" />
+<meta
+  name="twitter:title"
+  content="Redis - Konger&#39;s blog"
+/>
+<meta
+  name="twitter:description"
+  content="Redis Programming For C&#43;&#43;"
+/>
+<meta name="twitter:site" content="http://localhost:1313/" />
+<meta name="twitter:creator" content="" />
+<meta
+  name="twitter:image"
+  content="http://localhost:1313/"
+/>
+
+
+<meta
+  property="og:type"
+  content="article"
+/>
+<meta
+  property="og:title"
+  content="Redis - Konger&#39;s blog"
+/>
+<meta
+  property="og:description"
+  content="Redis Programming For C&#43;&#43;"
+/>
+<meta property="og:url" content="http://localhost:1313/post/redis/" />
+<meta property="og:site_name" content="Redis" />
+<meta
+  property="og:image"
+  content="http://localhost:1313/"
+/>
+<meta property="og:image:width" content="2048" />
+<meta property="og:image:height" content="1024" />
+
+<meta property="article:published_time" content="2026-05-02 17:07:41 &#43;0800 CST" />
+
+
+
+
+
+
+
+
+</head>
+
+
+<body>
+  <div style="position: relative">
+  <header class="Header js-details-container Details px-3 px-md-4 px-lg-5 flex-wrap flex-md-nowrap open Details--on">
+    <div class="Header-item mobile-none" style="margin-top: -4px; margin-bottom: -4px;">
+      <a class="Header-link" href="http://localhost:1313/">
+        <img class="octicon" height="32" width="32" src="/images/page.png">
+      </a>
+    </div>
+    <div class="Header-item d-md-none">
+      <button class="Header-link btn-link js-details-target" type="button"
+        onclick="document.querySelector('#header-search').style.display = document.querySelector('#header-search').style.display == 'none'? 'block': 'none'">
+        <svg height="24" class="octicon octicon-three-bars" viewBox="0 0 16 16" version="1.1" width="24">
+          <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div style="display: none;" id="header-search"
+      class="Header-item Header-item--full flex-column flex-md-row width-full flex-order-2 flex-md-order-none mr-0 mr-md-3 mt-3 mt-md-0 Details-content--hidden-not-important d-md-flex">
+      <div
+        class="Header-search header-search flex-auto js-site-search position-relative flex-self-stretch flex-md-self-auto mb-3 mb-md-0 mr-0 mr-md-3 scoped-search site-scoped-search js-jump-to">
+        <div class="position-relative">
+          
+          <form target="_blank" id="search-form" action="" accept-charset="UTF-8" method="get"
+            autocomplete="off">
+            <label
+              class="Header-search-label form-control input-sm header-search-wrapper p-0 js-chromeless-input-container header-search-wrapper-jump-to position-relative d-flex flex-justify-between flex-items-center">
+              <input type="text"
+                class="Header-search-input form-control input-sm header-search-input jump-to-field js-jump-to-field js-site-search-focus js-site-search-field is-clearable"
+                name="q" value="" placeholder="Search" autocomplete="off">
+            </label>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="Header-item Header-item--full flex-justify-center d-md-none position-relative">
+      <a class="Header-link " href="http://localhost:1313/">
+        <img class="octicon octicon-mark-github v-align-middle" height="32" width="32" src="/images/page.png">
+      </a>
+    </div>
+    <div class="Header-item" style="margin-right: 0;">
+      <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
+        <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
+          version="1.1" width="16" height="16">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z">
+          </path>
+        </svg>
+      </a>
+    </div>
+  </header>
+</div>
+
+  <div id="search-result" class="container-lg px-3 new-discussion-timeline" style="display: none;">
+</div>
+
+  
+<div class="application-main">
+  <div>
+  <main>
+    <div class="gisthead pagehead bg-gray-light pb-0 pt-3 mb-4">
+      <div class="px-0">
+        <div class="mb-3 d-flex px-3 px-md-3 px-lg-5">
+          <div class="flex-auto min-width-0 width-fit mr-3">
+            <div class="d-flex">
+              <div class="d-none d-md-block">
+                <a class="avatar mr-2 flex-shrink-0" href="http://localhost:1313/">
+                  <img class=" avatar-user"
+                    src="/images/avatar.png"
+                    width="32" height="32"></a>
+              </div>
+              <div class="d-flex flex-column">
+                <h1 class="break-word f3 text-normal mb-md-0 mb-1">
+                  <span class="author">
+                    <a href="http://localhost:1313/">Konger</a>
+                  </span>
+                  <span class="path-divider">/</span>
+                  <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
+                    <a href="http://localhost:1313/post/redis/">Redis</a>
+                  </strong>
+                </h1>
+                <div class="note m-0">
+                  Created <relative-time datetime="Sat, 02 May 2026 17:07:41 &#43;0800"
+                    class="no-wrap">
+                    Sat, 02 May 2026 17:07:41 &#43;0800</relative-time>
+
+                  
+                  <span class="file-info-divider"></span>
+                  Modified <relative-time datetime="Sat, 02 May 2026 17:07:41 &#43;0800"
+                    class="no-wrap">
+                    Sat, 02 May 2026 17:07:41 &#43;0800</relative-time>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-lg px-3 new-discussion-timeline">
+      <div class="repository-content gist-content">
+        <div>
+          <div class="js-gist-file-update-container js-task-list-container file-box">
+            <div id="file-pytest" class="file my-2">
+              <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
+                <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
+                  <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
+                    
+                    <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
+                      <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
+                        <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
+                      </svg>
+                    </summary>
+                    <details-menu class="SelectMenu" id="toc-details" style="display: none;">
+                      <div class="SelectMenu-modal rounded-3 mt-1" style="max-height: 340px;">
+                        <div class="SelectMenu-list SelectMenu-list--borderless p-2" style="overscroll-behavior: contain;" id="toc-list">
+                        </div>
+                      </div>
+                    </details-menu>
+                      2280 Words
+                    
+
+                  </div>
+                  <div class="file-actions flex-order-2 pt-0">
+                    
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="Box-body px-5 pb-5" style="z-index: 1">
+                <article class="markdown-body entry-content container-lg"><h1 id="redis-programming-for-c">Redis Programming For C++</h1>
+<h2 id="1preparation-of-the-development-environment">1.Preparation of the development environment</h2>
+<h3 id="1install-redis">1.Install Redis</h3>
+<ul>
+<li>确保已安装 redis</li>
+</ul>
+<pre tabindex="0"><code>redis --version
+</code></pre><h3 id="2clone-hiredis">2.Clone hiredis</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ git clone https://github.com/redis/hiredis.git
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> hiredis/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">$ cmake ..
+</span></span><span class="line"><span class="cl">$ make install
+</span></span></code></pre></div><h2 id="2the-basic-process-of-connecting-to-redis-in-c">2.The basic process of connecting to Redis in C++</h2>
+<p>hiredis提供的是 <strong>C API</strong>，C++ 可直接调用：</p>
+<blockquote>
+<p>初始化 → 连接 → 执行 redis → 处理结果 → 释放资源</p>
+</blockquote>
+<h2 id="3synchronous-api">3.Synchronous API</h2>
+<p>To consume the synchronous API, there are only a few function calls that need to be introduced:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">redisContext</span> <span class="o">*</span><span class="nf">redisConnect</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">ip</span><span class="p">,</span> <span class="kt">int</span> <span class="n">port</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="nf">redisCommand</span><span class="p">(</span><span class="n">redisContext</span> <span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">format</span><span class="p">,</span> <span class="p">...);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">freeReplyObject</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">reply</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="connecting">Connecting</h3>
+<p>The function <code>redisConnect</code> is used to create a so-called <code>redisContext</code>. The context is where Hiredis holds state for a connection. The <code>redisContext</code> struct has an integer <code>err</code> field that is non-zero when the connection is in an error state. The field <code>errstr</code> will contain a string with a description of the error. More information on errors can be found in the <strong>Errors</strong> section. After trying to connect to Redis using <code>redisConnect</code> you should check the <code>err</code> field to see if establishing the connection was successful:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">redisContext</span> <span class="o">*</span><span class="n">c</span> <span class="o">=</span> <span class="n">redisConnect</span><span class="p">(</span><span class="s">&#34;127.0.0.1&#34;</span><span class="p">,</span> <span class="mi">6379</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">||</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&#34;Error: %s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">c</span><span class="o">-&gt;</span><span class="n">errstr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// handle error
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">printf</span><span class="p">(</span><span class="s">&#34;Can&#39;t allocate redis context</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><em>Note: A <code>redisContext</code> is not thread-safe.</em></p>
+<h3 id="sending-commands">Sending commands</h3>
+<p>There are several ways to issue commands to Redis. The first that will be introduced is <code>redisCommand</code>. This function takes a format similar to printf. In the simplest form, it is used like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">reply</span> <span class="o">=</span> <span class="n">redisCommand</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s">&#34;SET foo bar&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><p>The specifier <code>%s</code> interpolates a string in the command, and uses <code>strlen</code> to determine the length of the string:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">reply</span> <span class="o">=</span> <span class="n">redisCommand</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s">&#34;SET foo %s&#34;</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+</span></span></code></pre></div><p>When you need to pass binary safe strings in a command, the <code>%b</code> specifier can be used. Together with a pointer to the string, it requires a <code>size_t</code> length argument of the string:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">reply</span> <span class="o">=</span> <span class="n">redisCommand</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s">&#34;SET foo %b&#34;</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="n">size_t</span><span class="p">)</span> <span class="n">valuelen</span><span class="p">);</span>
+</span></span></code></pre></div><p>Internally, Hiredis splits the command in different arguments and will convert it to the protocol used to communicate with Redis. One or more spaces separates arguments, so you can use the specifiers anywhere in an argument:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">reply</span> <span class="o">=</span> <span class="n">redisCommand</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s">&#34;SET key:%s %s&#34;</span><span class="p">,</span> <span class="n">myid</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="using-replies">Using replies</h3>
+<p>The return value of <code>redisCommand</code> holds a reply when the command was successfully executed. When an error occurs, the return value is <code>NULL</code> and the <code>err</code> field in the context will be set (see section on <strong>Errors</strong>). Once an error is returned the context cannot be reused and you should set up a new connection.</p>
+<p>The standard replies that <code>redisCommand</code> are of the type <code>redisReply</code>. The <code>type</code> field in the <code>redisReply</code> should be used to test what kind of reply was received:</p>
+<h4 id="resp2">RESP2</h4>
+<ul>
+<li><strong><code>REDIS_REPLY_STATUS</code></strong>:
+<ul>
+<li>The command replied with a status reply. The status string can be accessed using <code>reply-&gt;str</code>. The length of this string can be accessed using <code>reply-&gt;len</code>.</li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_ERROR</code></strong>:
+<ul>
+<li>The command replied with an error. The error string can be accessed identical to <code>REDIS_REPLY_STATUS</code>.</li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_INTEGER</code></strong>:
+<ul>
+<li>The command replied with an integer. The integer value can be accessed using the <code>reply-&gt;integer</code> field of type <code>long long</code>.</li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_NIL</code></strong>:
+<ul>
+<li>The command replied with a <strong>nil</strong> object. There is no data to access.</li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_STRING</code></strong>:
+<ul>
+<li>A bulk (string) reply. The value of the reply can be accessed using <code>reply-&gt;str</code>. The length of this string can be accessed using <code>reply-&gt;len</code>.</li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_ARRAY</code></strong>:
+<ul>
+<li>A multi bulk reply. The number of elements in the multi bulk reply is stored in <code>reply-&gt;elements</code>. Every element in the multi bulk reply is a <code>redisReply</code> object as well and can be accessed via <code>reply-&gt;element[..index..]</code>. Redis may reply with nested arrays but this is fully supported.</li>
+</ul>
+</li>
+</ul>
+<h4 id="resp3">RESP3</h4>
+<p>Hiredis also supports every new <code>RESP3</code> data type which are as follows. For more information about the protocol see the <code>RESP3</code> <a href="https://github.com/antirez/RESP3/blob/master/spec.md">specification.</a></p>
+<ul>
+<li><strong><code>REDIS_REPLY_DOUBLE</code></strong>:
+<ul>
+<li>The command replied with a double-precision floating point number. The value is stored as a string in the <code>str</code> member, and can be converted with <code>strtod</code> or similar.</li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_BOOL</code></strong>:
+<ul>
+<li>A boolean true/false reply. The value is stored in the <code>integer</code> member and will be either <code>0</code> or <code>1</code>.</li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_MAP</code></strong>:
+<ul>
+<li>An array with the added invariant that there will always be an even number of elements. The MAP is functionally equivalent to <code>REDIS_REPLY_ARRAY</code> except for the previously mentioned invariant.</li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_SET</code></strong>:
+<ul>
+<li>An array response where each entry is unique. Like the MAP type, the data is identical to an array response except there are no duplicate values.</li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_PUSH</code></strong>:
+<ul>
+<li>An array that can be generated spontaneously by Redis. This array response will always contain at least two subelements. The first contains the type of <code>PUSH</code> message (e.g. <code>message</code>, or <code>invalidate</code>), and the second being a sub-array with the <code>PUSH</code> payload itself.</li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_ATTR</code></strong>:
+<ul>
+<li>An array structurally identical to a <code>MAP</code> but intended as meta-data about a reply. <em>As of Redis 6.0.6 this reply type is not used in Redis</em></li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_BIGNUM</code></strong>:
+<ul>
+<li>A string representing an arbitrarily large signed or unsigned integer value. The number will be encoded as a string in the <code>str</code> member of <code>redisReply</code>.</li>
+</ul>
+</li>
+<li><strong><code>REDIS_REPLY_VERB</code></strong>:
+<ul>
+<li>A verbatim string, intended to be presented to the user without modification. The string payload is stored in the <code>str</code> member, and type data is stored in the <code>vtype</code> member (e.g. <code>txt</code> for raw text or <code>md</code> for markdown).</li>
+</ul>
+</li>
+</ul>
+<p>Replies should be freed using the <code>freeReplyObject()</code> function. Note that this function will take care of freeing sub-reply objects contained in arrays and nested arrays, so there is no need for the user to free the sub replies (it is actually harmful and will corrupt the memory).</p>
+<p><strong>Important:</strong> the current version of hiredis (1.0.0) frees replies when the asynchronous API is used. This means you should not call <code>freeReplyObject</code> when you use this API. The reply is cleaned up by hiredis <em>after</em> the callback returns. We may introduce a flag to make this configurable in future versions of the library.</p>
+<h3 id="cleaning-up">Cleaning up</h3>
+<p>To disconnect and free the context the following function can be used:</p>
+<pre tabindex="0"><code>void redisFree(redisContext *c);
+</code></pre><p>This function immediately closes the socket and then frees the allocations done in creating the context.</p>
+<h3 id="pipelining">Pipelining</h3>
+<p>To explain how Hiredis supports pipelining in a blocking connection, there needs to be understanding of the internal execution flow.</p>
+<p>When any of the functions in the <code>redisCommand</code> family is called, Hiredis first formats the command according to the Redis protocol. The formatted command is then put in the output buffer of the context. This output buffer is dynamic, so it can hold any number of commands. After the command is put in the output buffer, <code>redisGetReply</code> is called. This function has the following two execution paths:</p>
+<ol>
+<li>The input buffer is non-empty:
+<ul>
+<li>Try to parse a single reply from the input buffer and return it</li>
+<li>If no reply could be parsed, continue at <em>2</em></li>
+</ul>
+</li>
+<li>The input buffer is empty:
+<ul>
+<li>Write the <strong>entire</strong> output buffer to the socket</li>
+<li>Read from the socket until a single reply could be parsed</li>
+</ul>
+</li>
+</ol>
+<p>The function <code>redisGetReply</code> is exported as part of the Hiredis API and can be used when a reply is expected on the socket. To pipeline commands, the only thing that needs to be done is filling up the output buffer. For this cause, two commands can be used that are identical to the <code>redisCommand</code> family, apart from not returning a reply:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">redisAppendCommand</span><span class="p">(</span><span class="n">redisContext</span> <span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">format</span><span class="p">,</span> <span class="p">...);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">redisAppendCommandArgv</span><span class="p">(</span><span class="n">redisContext</span> <span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">**</span><span class="n">argv</span><span class="p">,</span> <span class="k">const</span> <span class="n">size_t</span> <span class="o">*</span><span class="n">argvlen</span><span class="p">);</span>
+</span></span></code></pre></div><p>After calling either function one or more times, <code>redisGetReply</code> can be used to receive the subsequent replies. The return value for this function is either <code>REDIS_OK</code> or <code>REDIS_ERR</code>, where the latter means an error occurred while reading a reply. Just as with the other commands, the <code>err</code> field in the context can be used to find out what the cause of this error is.</p>
+<p>The following examples shows a simple pipeline (resulting in only a single call to <code>write(2)</code> and a single call to <code>read(2)</code>):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">redisReply</span> <span class="o">*</span><span class="n">reply</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">redisAppendCommand</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="s">&#34;SET foo bar&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">redisAppendCommand</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="s">&#34;GET foo&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">redisGetReply</span><span class="p">(</span><span class="n">context</span><span class="p">,(</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">reply</span><span class="p">);</span> <span class="c1">// reply for SET
+</span></span></span><span class="line"><span class="cl"><span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">redisGetReply</span><span class="p">(</span><span class="n">context</span><span class="p">,(</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="o">&amp;</span><span class="n">reply</span><span class="p">);</span> <span class="c1">// reply for GET
+</span></span></span><span class="line"><span class="cl"><span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span></code></pre></div><p>This API can also be used to implement a blocking subscriber:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">reply</span> <span class="o">=</span> <span class="n">redisCommand</span><span class="p">(</span><span class="n">context</span><span class="p">,</span><span class="s">&#34;SUBSCRIBE foo&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="n">redisGetReply</span><span class="p">(</span><span class="n">context</span><span class="p">,(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">reply</span><span class="p">)</span> <span class="o">==</span> <span class="n">REDIS_OK</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// consume message
+</span></span></span><span class="line"><span class="cl">    <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="errors">Errors</h3>
+<p>When a function call is not successful, depending on the function either <code>NULL</code> or <code>REDIS_ERR</code> is returned. The <code>err</code> field inside the context will be non-zero and set to one of the following constants:</p>
+<ul>
+<li><strong><code>REDIS_ERR_IO</code></strong>: There was an I/O error while creating the connection, trying to write to the socket or read from the socket. If you included <code>errno.h</code> in your application, you can use the global <code>errno</code> variable to find out what is wrong.</li>
+<li><strong><code>REDIS_ERR_EOF</code></strong>: The server closed the connection which resulted in an empty read.</li>
+<li><strong><code>REDIS_ERR_PROTOCOL</code></strong>: There was an error while parsing the protocol.</li>
+<li><strong><code>REDIS_ERR_OTHER</code></strong>: Any other error. Currently, it is only used when a specified hostname to connect to cannot be resolved.</li>
+</ul>
+<p>In every case, the <code>errstr</code> field in the context will be set to hold a string representation of the error.</p>
+<h2 id="4encapsulate-a-redis-client">4.Encapsulate a Redis client</h2>
+<h3 id="head-file">Head File</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#pragma once
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;hiredis/hiredis.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include&lt;vector&gt;
+</span></span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">RedisClient</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RedisClient</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="o">~</span><span class="n">RedisClient</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 建立连接
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">connect</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">host</span> <span class="o">=</span> <span class="s">&#34;127.0.0.1&#34;</span><span class="p">,</span> <span class="kt">int</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">6379</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//输入密码
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">inputPassword</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span><span class="n">password</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 确认连接是否建立
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">isConnected</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">//通用命令
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 1.查看所有的键
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">getAllKeys</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 2.查看键是否存在
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">existsKey</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 3.删除键
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">del</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 4.设置键的过期时间
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">expire</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">seconds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 5.查看键的存活时间
+</span></span></span><span class="line"><span class="cl">  <span class="kt">int64_t</span> <span class="nf">existTime</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 6.移除键的过期时间
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">persist</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 7.查看当前键的类型
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">keyType</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 8.清空当前数据库
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">flushDB</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 9.清空所有数据库
+</span></span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">flushAll</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// String命令
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 1.设置字符串
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">stradd</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 2.设置有时间限制的字符串
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">stretex</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">seconds</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 3.获得字符串值
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">get</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 4.批量获取字符串
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">strmget</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">keys</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// Set命令
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 1.添加元素
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">setadd</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">member</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 2. 删除元素
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">setrem</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">redisContext</span> <span class="o">*</span><span class="n">context_</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><h3 id="source-file">Source File</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;RedisClient.hpp&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;hiredis/hiredis.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;hiredis/read.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdexcept&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="n">RedisClient</span><span class="o">::</span><span class="n">RedisClient</span><span class="p">()</span> <span class="o">:</span> <span class="n">context_</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 释放连接
+</span></span></span><span class="line"><span class="cl"><span class="n">RedisClient</span><span class="o">::~</span><span class="n">RedisClient</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">context_</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">redisFree</span><span class="p">(</span><span class="n">context_</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 建立连接
+</span></span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">connect</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">host</span><span class="p">,</span> <span class="kt">int</span> <span class="n">port</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">context_</span> <span class="o">=</span> <span class="n">redisConnect</span><span class="p">(</span><span class="n">host</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">port</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">context_</span> <span class="o">||</span> <span class="n">context_</span><span class="o">-&gt;</span><span class="n">err</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 输入密码
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">inputPassword</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">password</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;AUTH %s&#34;</span><span class="p">,</span> <span class="n">password</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&#34;AUTH command failed: no reply&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">REDIS_REPLY_ERROR</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">err</span> <span class="o">=</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&#34;AUTH failed: &#34;</span> <span class="o">+</span> <span class="n">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">REDIS_REPLY_STATUS</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">throw</span> <span class="n">std</span><span class="o">::</span><span class="n">runtime_error</span><span class="p">(</span><span class="s">&#34;Unexpected reply type for AUTH&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 确认连接是否建立
+</span></span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">isConnected</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">context_</span> <span class="o">&amp;&amp;</span> <span class="n">context_</span><span class="o">-&gt;</span><span class="n">fd</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 通用命令
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 1.查看所有的键
+</span></span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">getAllKeys</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">keys</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;KEYS *&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">keys</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">REDIS_REPLY_ARRAY</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int32_t</span> <span class="n">keyCount</span> <span class="o">=</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">elements</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">keyCount</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 数组里每个元素都是 string 类型
+</span></span></span><span class="line"><span class="cl">      <span class="n">redisReply</span> <span class="o">*</span><span class="n">ele</span> <span class="o">=</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">element</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="n">keys</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">ele</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">keys</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2.查看键是否存在
+</span></span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">existsKey</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;EXISTS %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">reply</span> <span class="o">&amp;&amp;</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">integer</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">ok</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 3.删除键
+</span></span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">del</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;DEL %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">reply</span> <span class="o">&amp;&amp;</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">integer</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">ok</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 4.设置键的过期时间
+</span></span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">expire</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">seconds</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;EXPIRE %s %d&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">seconds</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">reply</span> <span class="o">&amp;&amp;</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">integer</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">ok</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 5.查看键的存活时间
+</span></span></span><span class="line"><span class="cl"><span class="kt">int64_t</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">existTime</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;TTL %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span> <span class="o">||</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">REDIS_REPLY_INTEGER</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="mi">3</span><span class="p">;</span> <span class="c1">//-3表示获取错误
+</span></span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">integer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 6.移除键的过期时间
+</span></span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">persist</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;PERSIST %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">ok</span> <span class="o">=</span> <span class="n">reply</span> <span class="o">&amp;&amp;</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">integer</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">ok</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 7.查看当前键的类型
+</span></span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">keyType</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;TYPE %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">type</span> <span class="o">=</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">type</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 8.清空当前数据库
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">flushDB</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;FLUSHDB&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 9.清空所有数据库
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">flushAll</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;FLUSHALL&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script type="application/javascript" src='http://localhost:1313/js/toc.js'></script>
+<link rel="stylesheet" href='http://localhost:1313/css/toc.css' />
+
+  
+<div id="gitalk-container" class="gitalk-container"></div>
+<link rel="stylesheet" href='http://localhost:1313/css/gitalk.css'>
+<script src='http://localhost:1313/js/gitalk.min.js'></script>
+<script>
+  const gitalk = new Gitalk({
+    clientID: '',
+    clientSecret: '',
+    repo: '',
+    owner: '',
+    admin: [''],
+    id: eval( null ), 
+    distractionFreeMode: false 
+  });
+  (function() {
+    gitalk.render('gitalk-container');
+  })();
+</script>
+
+</div>
+
+  <div class="footer container-xl width-full p-responsive">
+  <div
+    class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between flex-sm-items-center pt-6 pb-2 mt-6 f6 text-gray border-top border-gray-light ">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mr-lg-4" href="http://localhost:1313/">
+      <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24">
+        <path fill-rule="evenodd"
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+        </path>
+      </svg>
+    </a>
+    <ul class="list-style-none d-flex flex-wrap col-12 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
+      
+      <li class="mr-3 mr-lg-0">Theme by <a href='https://github.com/MeiK2333/github-style'>github-style</a></li>
+      
+      <li class="mr-3 mr-lg-0">GitHub and the Invertocat logo are trademarks of <a href="https://github.com/">GitHub, Inc.</a></li>
+    </ul>
+  </div>
+  <div class="d-flex flex-justify-center pb-6">
+    <span class="f6 text-gray-light"></span>
+  </div>
+
+
+</div>
+
+</body>
+
+<script type="application/javascript" src="http://localhost:1313/js/github-style.js"></script>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+<script type="application/javascript" src='http://localhost:1313/js/search.js'></script>
+
+
+
+</html>
