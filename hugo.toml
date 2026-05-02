@@ -20,7 +20,16 @@ pygmentsUseClasses = true
   enableGitalk = true
   custom_css = ["css/custom.css"]
   custom_js = ["js/custom.js"]
+  enableSearch = true
 
- [caches]
-  [caches.images]
-    dir = ':cacheDir/images'
+[outputs]
+  home = ["html", "json"]
+
+[outputFormats.json]
+  mediaType = "application/json"
+  baseName = "index"
+  isPlainText = false
+
+[caches]
+ [caches.images]
+  dir = ':cacheDir/images'

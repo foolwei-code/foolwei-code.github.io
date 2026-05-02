@@ -10,7 +10,7 @@
     <link rel="stylesheet" href='http://localhost:1313/css/light.css' />
     <link rel="stylesheet" href='http://localhost:1313/css/dark.css' />
     <link rel="stylesheet" href='http://localhost:1313/css/syntax.css' />
-    <title>Title_of_the_post - Konger&#39;s blog</title>
+    <title>Qt - Konger&#39;s blog</title>
     
     <link rel="icon" type="image/x-icon" href='http://localhost:1313/images/favicon.ico'>
     
@@ -23,24 +23,24 @@
     
     <meta
   name="description"
-  content="this is my first blog"
+  content="this is my Qt blog"
 />
 <meta
   name="keywords"
   content='blog, google analytics'
 />
 <meta name="robots" content="noodp" />
-<link rel="canonical" href="http://localhost:1313/post/title_of_the_post/" />
+<link rel="canonical" href="http://localhost:1313/post/qt/" />
 
 
 <meta name="twitter:card" content="summary" />
 <meta
   name="twitter:title"
-  content="Title_of_the_post - Konger&#39;s blog"
+  content="Qt - Konger&#39;s blog"
 />
 <meta
   name="twitter:description"
-  content="this is my first blog"
+  content="this is my Qt blog"
 />
 <meta name="twitter:site" content="http://localhost:1313/" />
 <meta name="twitter:creator" content="" />
@@ -56,14 +56,14 @@
 />
 <meta
   property="og:title"
-  content="Title_of_the_post - Konger&#39;s blog"
+  content="Qt - Konger&#39;s blog"
 />
 <meta
   property="og:description"
-  content="this is my first blog"
+  content="this is my Qt blog"
 />
-<meta property="og:url" content="http://localhost:1313/post/title_of_the_post/" />
-<meta property="og:site_name" content="Title_of_the_post" />
+<meta property="og:url" content="http://localhost:1313/post/qt/" />
+<meta property="og:site_name" content="Qt" />
 <meta
   property="og:image"
   content="http://localhost:1313/"
@@ -71,7 +71,7 @@
 <meta property="og:image:width" content="2048" />
 <meta property="og:image:height" content="1024" />
 
-<meta property="article:published_time" content="2026-04-29 22:49:03 &#43;0800 CST" />
+<meta property="article:published_time" content="2026-05-01 16:05:58 &#43;0800 CST" />
 
 
 
@@ -163,19 +163,19 @@
                   </span>
                   <span class="path-divider">/</span>
                   <strong class="css-truncate css-truncate-target mr-1" style="max-width: 410px">
-                    <a href="http://localhost:1313/post/title_of_the_post/">Title_of_the_post</a>
+                    <a href="http://localhost:1313/post/qt/">Qt</a>
                   </strong>
                 </h1>
                 <div class="note m-0">
-                  Created <relative-time datetime="Wed, 29 Apr 2026 22:49:03 &#43;0800"
+                  Created <relative-time datetime="Fri, 01 May 2026 16:05:58 &#43;0800"
                     class="no-wrap">
-                    Wed, 29 Apr 2026 22:49:03 &#43;0800</relative-time>
+                    Fri, 01 May 2026 16:05:58 &#43;0800</relative-time>
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Wed, 29 Apr 2026 22:49:03 &#43;0800"
+                  Modified <relative-time datetime="Fri, 01 May 2026 16:05:58 &#43;0800"
                     class="no-wrap">
-                    Wed, 29 Apr 2026 22:49:03 &#43;0800</relative-time>
+                    Fri, 01 May 2026 16:05:58 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -205,7 +205,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      8 Words
+                      812 Words
                     
 
                   </div>
@@ -228,7 +228,57 @@
 
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
-                <article class="markdown-body entry-content container-lg"><p>hello everybody ! I create mys first blog</p>
+                <article class="markdown-body entry-content container-lg"><h1 id="qt学习">Qt学习</h1>
+<h2 id="1qt概念">1.Qt概念</h2>
+<p>Qt 是一套<strong>跨平台 C++ 应用开发框架</strong>，1991 年由挪威 Trolltech 公司发布，现由 The Qt Company 维护，支持商业与开源（LGPL/GPL）双授权。</p>
+<h3 id="一核心特点">一、核心特点</h3>
+<ul>
+<li>
+<p><strong>跨平台</strong>：一次编码，可编译运行于 Windows、Linux、macOS、Android、iOS 及嵌入式 Linux/QNX/VxWorks 等。</p>
+</li>
+<li>
+<p><strong>信号与槽（Signals &amp; Slots）</strong>：替代回调，实现对象间<strong>松耦合通信</strong>，是 Qt 最核心机制。</p>
+</li>
+<li>
+<p>GUI 双方案</p>
+<ul>
+<li><strong>Qt Widgets</strong>：传统桌面控件（按钮、表格等），成熟稳定。</li>
+<li><strong>Qt Quick/QML</strong>：声明式语言，适合<strong>动态、现代、流畅 UI</strong>（移动端 / 嵌入式）。</li>
+</ul>
+<p><img src="QtLogo.png" alt="Qt Logo"></p>
+</li>
+<li>
+<p><strong>功能全面</strong>：内置网络、数据库、多线程、多媒体、OpenGL、JSON/XML 等模块。</p>
+</li>
+<li>
+<p><strong>工具链完整</strong>：配套 <strong>Qt Creator IDE</strong>，含可视化 UI 设计器（Qt Designer）、调试、部署、打包工具。</p>
+</li>
+<li>
+<p><strong>语言绑定</strong>：除 C++ 外，可通过 PyQt/PySide（Python）、Qt for Python、QML+JS 等开发。</p>
+</li>
+</ul>
+<h3 id="二核心模块essentials">二、核心模块（Essentials）</h3>
+<ul>
+<li><strong>Qt Core</strong>：基础非图形类（字符串、容器、文件、线程、事件循环）。</li>
+<li><strong>Qt GUI</strong>：图形基础（窗口、绘图、OpenGL）。</li>
+<li><strong>Qt Widgets</strong>：传统桌面控件集Qt。</li>
+<li><strong>Qt Quick</strong>：QML 引擎与基础类型Qt。</li>
+<li><strong>Qt Network</strong>：TCP/UDP/HTTP/WebSocket 等网络通信。</li>
+<li><strong>Qt SQL</strong>：数据库访问（MySQL、PostgreSQL、SQLite 等）。</li>
+<li><strong>Qt Multimedia</strong>：音视频播放、录制、摄像头。</li>
+</ul>
+<h3 id="三版本">三、版本</h3>
+<ul>
+<li><strong>Qt 5</strong>：长期支持（LTS），工业界广泛使用，稳定可靠。</li>
+<li><strong>Qt 6</strong>：最新主流版本，架构重构，<strong>QML 引擎升级</strong>、图形栈优化、更好支持 C++17/20，推荐新项目使用。</li>
+</ul>
+<h3 id="四典型应用场景">四、典型应用场景</h3>
+<ul>
+<li><strong>桌面软件</strong>：WPS Office、VirtualBox、VLC、Autodesk Maya 工具、工业控制软件。</li>
+<li><strong>嵌入式 &amp; 车载</strong>：汽车仪表 / 中控、智能家居面板、医疗设备、工业 HMI。</li>
+<li><strong>移动应用</strong>：跨平台 App、智能电视 / 盒子应用。</li>
+<li><strong>非 GUI 程序</strong>：服务器、命令行工具、后台服务（仅用 Core/Network/SQL 等）。</li>
+</ul>
 </article>
               </div>
             </div>

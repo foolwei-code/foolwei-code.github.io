@@ -1,14 +1,11 @@
 +++
-date = '2026-04-29T22:49:03+08:00'
+date = '2026-05-01T16:31:40+08:00'
 draft = false
-title = 'Title_of_the_post'
-
-pin=true
+title = 'Part1 Basics'
 
 summary = 'this is my first blog'
-
-tags = ["Qt学习系列"]
 
 +++
 
 hello everybody ! I create mys first blog
+
