@@ -276,11 +276,15 @@ public:
   bool strmget(const std::vector<std::string> &keys);
 
   // Set命令
-  // 1.添加元素
-  bool setadd(const std::string &key, const std::string &member);
-  // 2. 删除元素
-  bool setrem(const std::string &key);
-  
+  bool sadd(const std::string &key, const std::vector<std::string> &members);
+  bool sadd(const std::string &key, const std::string &member); // 单个成员重载
+  bool srem(const std::string &key, const std::vector<std::string> &members);
+  bool srem(const std::string &key, const std::string &member);
+  std::vector<std::string> smembers(const std::string &key);
+  bool sismember(const std::string &key, const std::string &member);
+  size_t scard(const std::string &key);
+  std::string spop(const std::string &key);        // 随机弹出一个
+  std::string srandmember(const std::string &key); // 随机返回一个（不移除）
 private:
   redisContext *context_;
 };
@@ -404,6 +408,211 @@ void RedisClient::flushAll() {
   freeReplyObject(reply);
 }
 
+/ String命令
+// 1.设置字符串
+bool RedisClient::stradd(const std::string &key, const std::string &value) {
+  auto reply = static_cast<redisReply *>(
+      redisCommand(context_, "SET %s %s", key.c_str(), value.c_str()));
+  if (!reply)
+    return false;
+  bool ok =
+      (reply->type == REDIS_REPLY_STATUS && std::string{reply->str} == "OK");
+  freeReplyObject(reply);
+  return ok;
+}
+// 2.设置有时间限制的字符串
+bool RedisClient::stretex(const std::string &key, uint32_t seconds,
+                          const std::string &value) {
+  auto reply = static_cast<redisReply *>(redisCommand(
+      context_, "SETEX %s %u %s", key.c_str(), seconds, value.c_str()));
+  if (!reply)
+    return false;
+
+  bool ok =
+      (reply->type == REDIS_REPLY_STATUS && std::string(reply->str) == "OK");
+  freeReplyObject(reply);
+  return ok;
+}
+// 3.获得字符串值
+std::string RedisClient::get(const std::string &key) {
+  auto reply =
+      static_cast<redisReply *>(redisCommand(context_, "GET %s", key.c_str()));
+  if (!reply)
+    return "";
+
+  std::string value;
+  if (reply->type == REDIS_REPLY_STRING) {
+    value.assign(reply->str, reply->len);
+  }
+  freeReplyObject(reply);
+  return value;
+}
+// 4.批量获取字符串
+std::vector<std::string>
+RedisClient::strmget(const std::vector<std::string> &keys) {
+  std::vector<std::string> result;
+  if (keys.empty()) {
+    return result; // 空输入直接返回空vector
+  }
+
+  // 构造 "MGET key1 key2 ..." 命令字符串
+  std::string cmd = "MGET";
+  for (const auto &key : keys) {
+    cmd += " " + key;
+  }
+
+  // 执行命令
+  redisReply *reply =
+      static_cast<redisReply *>(redisCommand(context_, cmd.c_str()));
+  if (!reply) {
+    // 命令执行失败，返回空vector（或可记录日志）
+    return result;
+  }
+
+  // 检查返回类型是否为数组
+  if (reply->type == REDIS_REPLY_ARRAY) {
+    result.reserve(reply->elements);
+    for (size_t i = 0; i < reply->elements; ++i) {
+      redisReply *ele = reply->element[i];
+      if (ele && ele->type == REDIS_REPLY_STRING) {
+        // 存在且是字符串，按长度拷贝（二进制安全）
+        result.emplace_back(ele->str, ele->len);
+      } else {
+        // key 不存在或其他类型（如 nil），返回空字符串
+        result.emplace_back("");
+      }
+    }
+  }
+  // 如果返回类型不是数组（例如错误），result 保持为空
+
+  freeReplyObject(reply);
+  return result;
+}
+
+// Set命令
+
+bool RedisClient::sadd(const std::string &key,
+                       const std::vector<std::string> &members) {
+  if (members.empty())
+    return false;
+
+  std::string cmd = "SADD " + key;
+  for (const auto &m : members) {
+    cmd += " " + m;
+  }
+
+  auto reply = static_cast<redisReply *>(redisCommand(context_, cmd.c_str()));
+  if (!reply || reply->type != REDIS_REPLY_INTEGER) {
+    if (reply)
+      freeReplyObject(reply);
+    return false;
+  }
+  bool ok = (reply->integer > 0);
+  freeReplyObject(reply);
+  return ok;
+}
+
+bool RedisClient::sadd(const std::string &key, const std::string &member) {
+  return sadd(key, std::vector<std::string>{member});
+}
+
+bool RedisClient::srem(const std::string &key,
+                       const std::vector<std::string> &members) {
+  if (members.empty())
+    return false;
+
+  std::string cmd = "SREM " + key;
+  for (const auto &m : members) {
+    cmd += " " + m;
+  }
+
+  auto reply = static_cast<redisReply *>(redisCommand(context_, cmd.c_str()));
+  if (!reply || reply->type != REDIS_REPLY_INTEGER) {
+    if (reply)
+      freeReplyObject(reply);
+    return false;
+  }
+  bool ok = (reply->integer > 0);
+  freeReplyObject(reply);
+  return ok;
+}
+
+bool RedisClient::srem(const std::string &key, const std::string &member) {
+  return srem(key, std::vector<std::string>{member});
+}
+
+std::vector<std::string> RedisClient::smembers(const std::string &key) {
+  std::vector<std::string> result;
+  auto reply = static_cast<redisReply *>(
+      redisCommand(context_, "SMEMBERS %s", key.c_str()));
+  if (!reply || reply->type != REDIS_REPLY_ARRAY) {
+    if (reply)
+      freeReplyObject(reply);
+    return result;
+  }
+
+  result.reserve(reply->elements);
+  for (size_t i = 0; i < reply->elements; ++i) {
+    redisReply *ele = reply->element[i];
+    if (ele && ele->type == REDIS_REPLY_STRING) {
+      result.emplace_back(ele->str, ele->len);
+    }
+  }
+  freeReplyObject(reply);
+  return result;
+}
+
+bool RedisClient::sismember(const std::string &key, const std::string &member) {
+  auto reply = static_cast<redisReply *>(
+      redisCommand(context_, "SISMEMBER %s %s", key.c_str(), member.c_str()));
+  if (!reply || reply->type != REDIS_REPLY_INTEGER) {
+    if (reply)
+      freeReplyObject(reply);
+    return false;
+  }
+  bool exists = (reply->integer == 1);
+  freeReplyObject(reply);
+  return exists;
+}
+
+size_t RedisClient::scard(const std::string &key) {
+  auto reply = static_cast<redisReply *>(
+      redisCommand(context_, "SCARD %s", key.c_str()));
+  if (!reply || reply->type != REDIS_REPLY_INTEGER) {
+    if (reply)
+      freeReplyObject(reply);
+    return 0;
+  }
+  size_t count = static_cast<size_t>(reply->integer);
+  freeReplyObject(reply);
+  return count;
+}
+
+std::string RedisClient::spop(const std::string &key) {
+  auto reply =
+      static_cast<redisReply *>(redisCommand(context_, "SPOP %s", key.c_str()));
+  if (!reply || reply->type != REDIS_REPLY_STRING) {
+    if (reply)
+      freeReplyObject(reply);
+    return "";
+  }
+  std::string result(reply->str, reply->len);
+  freeReplyObject(reply);
+  return result;
+}
+
+std::string RedisClient::srandmember(const std::string &key) {
+  auto reply = static_cast<redisReply *>(
+      redisCommand(context_, "SRANDMEMBER %s", key.c_str()));
+  if (!reply || reply->type != REDIS_REPLY_STRING) {
+    if (reply)
+      freeReplyObject(reply);
+    return "";
+  }
+  std::string result(reply->str, reply->len);
+  freeReplyObject(reply);
+  return result;
+}
 ```
 
 
