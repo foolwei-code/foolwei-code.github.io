@@ -173,9 +173,9 @@
 
                   
                   <span class="file-info-divider"></span>
-                  Modified <relative-time datetime="Sat, 02 May 2026 17:07:41 &#43;0800"
+                  Modified <relative-time datetime="Wed, 20 May 2026 15:52:23 &#43;0800"
                     class="no-wrap">
-                    Sat, 02 May 2026 17:07:41 &#43;0800</relative-time>
+                    Wed, 20 May 2026 15:52:23 &#43;0800</relative-time>
                   
                 </div>
               </div>
@@ -205,7 +205,7 @@
                         </div>
                       </div>
                     </details-menu>
-                      2280 Words
+                      3073 Words
                     
 
                   </div>
@@ -442,12 +442,16 @@
 </span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">strmget</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">keys</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="c1">// Set命令
-</span></span></span><span class="line"><span class="cl">  <span class="c1">// 1.添加元素
-</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">setadd</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">member</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="c1">// 2. 删除元素
-</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">setrem</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">sadd</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">members</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">sadd</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">member</span><span class="p">);</span> <span class="c1">// 单个成员重载
+</span></span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">srem</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">members</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">srem</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">member</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">smembers</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">sismember</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">member</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">size_t</span> <span class="nf">scard</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">spop</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span>        <span class="c1">// 随机弹出一个
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">srandmember</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">);</span> <span class="c1">// 随机返回一个（不移除）
+</span></span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">  <span class="n">redisContext</span> <span class="o">*</span><span class="n">context_</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span></code></pre></div><h3 id="source-file">Source File</h3>
@@ -565,6 +569,212 @@
 </span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;FLUSHALL&#34;</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">/</span> <span class="n">String命令</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 1.设置字符串
+</span></span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">stradd</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;SET %s %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">value</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">ok</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">REDIS_REPLY_STATUS</span> <span class="o">&amp;&amp;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">{</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">}</span> <span class="o">==</span> <span class="s">&#34;OK&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">ok</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2.设置有时间限制的字符串
+</span></span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">stretex</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="kt">uint32_t</span> <span class="n">seconds</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                          <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">context_</span><span class="p">,</span> <span class="s">&#34;SETEX %s %u %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">seconds</span><span class="p">,</span> <span class="n">value</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">ok</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">REDIS_REPLY_STATUS</span> <span class="o">&amp;&amp;</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">)</span> <span class="o">==</span> <span class="s">&#34;OK&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">ok</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 3.获得字符串值
+</span></span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">get</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;GET %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">REDIS_REPLY_STRING</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">value</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">,</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 4.批量获取字符串
+</span></span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="n">RedisClient</span><span class="o">::</span><span class="n">strmget</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">keys</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">keys</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">;</span> <span class="c1">// 空输入直接返回空vector
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 构造 &#34;MGET key1 key2 ...&#34; 命令字符串
+</span></span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#34;MGET&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="nl">key</span> <span class="p">:</span> <span class="n">keys</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cmd</span> <span class="o">+=</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">key</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 执行命令
+</span></span></span><span class="line"><span class="cl">  <span class="n">redisReply</span> <span class="o">*</span><span class="n">reply</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="n">cmd</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 命令执行失败，返回空vector（或可记录日志）
+</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 检查返回类型是否为数组
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">REDIS_REPLY_ARRAY</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">elements</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">elements</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">redisReply</span> <span class="o">*</span><span class="n">ele</span> <span class="o">=</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">element</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">ele</span> <span class="o">&amp;&amp;</span> <span class="n">ele</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">REDIS_REPLY_STRING</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 存在且是字符串，按长度拷贝（二进制安全）
+</span></span></span><span class="line"><span class="cl">        <span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">ele</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">,</span> <span class="n">ele</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// key 不存在或其他类型（如 nil），返回空字符串
+</span></span></span><span class="line"><span class="cl">        <span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 如果返回类型不是数组（例如错误），result 保持为空
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Set命令
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">sadd</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">members</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">members</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#34;SADD &#34;</span> <span class="o">+</span> <span class="n">key</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="nl">m</span> <span class="p">:</span> <span class="n">members</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cmd</span> <span class="o">+=</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="n">cmd</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span> <span class="o">||</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">REDIS_REPLY_INTEGER</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">ok</span> <span class="o">=</span> <span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">integer</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">ok</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">sadd</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">member</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">sadd</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span><span class="n">member</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">srem</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">members</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">members</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">cmd</span> <span class="o">=</span> <span class="s">&#34;SREM &#34;</span> <span class="o">+</span> <span class="n">key</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span> <span class="o">&amp;</span><span class="nl">m</span> <span class="p">:</span> <span class="n">members</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cmd</span> <span class="o">+=</span> <span class="s">&#34; &#34;</span> <span class="o">+</span> <span class="n">m</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="n">cmd</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span> <span class="o">||</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">REDIS_REPLY_INTEGER</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">ok</span> <span class="o">=</span> <span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">integer</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">ok</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">srem</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">member</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nf">srem</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span><span class="n">member</span><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">smembers</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;SMEMBERS %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span> <span class="o">||</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">REDIS_REPLY_ARRAY</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">result</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">elements</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">elements</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">redisReply</span> <span class="o">*</span><span class="n">ele</span> <span class="o">=</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">element</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">ele</span> <span class="o">&amp;&amp;</span> <span class="n">ele</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">==</span> <span class="n">REDIS_REPLY_STRING</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">result</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">ele</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">,</span> <span class="n">ele</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">sismember</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">,</span> <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">member</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;SISMEMBER %s %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">(),</span> <span class="n">member</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span> <span class="o">||</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">REDIS_REPLY_INTEGER</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="n">exists</span> <span class="o">=</span> <span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">integer</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">exists</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">size_t</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">scard</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;SCARD %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span> <span class="o">||</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">REDIS_REPLY_INTEGER</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">size_t</span> <span class="n">count</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">size_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">integer</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">spop</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">      <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;SPOP %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span> <span class="o">||</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">REDIS_REPLY_STRING</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">result</span><span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">,</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">RedisClient</span><span class="o">::</span><span class="n">srandmember</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="o">&amp;</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">auto</span> <span class="n">reply</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">redisReply</span> <span class="o">*&gt;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">      <span class="n">redisCommand</span><span class="p">(</span><span class="n">context_</span><span class="p">,</span> <span class="s">&#34;SRANDMEMBER %s&#34;</span><span class="p">,</span> <span class="n">key</span><span class="p">.</span><span class="n">c_str</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">reply</span> <span class="o">||</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">!=</span> <span class="n">REDIS_REPLY_STRING</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">reply</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">result</span><span class="p">(</span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">str</span><span class="p">,</span> <span class="n">reply</span><span class="o">-&gt;</span><span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">freeReplyObject</span><span class="p">(</span><span class="n">reply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div></article>
               </div>
             </div>
@@ -583,12 +793,12 @@
 <script src='http://localhost:1313/js/gitalk.min.js'></script>
 <script>
   const gitalk = new Gitalk({
-    clientID: '',
-    clientSecret: '',
-    repo: '',
-    owner: '',
-    admin: [''],
-    id: eval( null ), 
+    clientID: 'Ov23lizw2fjqfY43cIRI',
+    clientSecret: 'b3f538832e3306c84cd3dd5aa1275c4bb8488120',
+    repo: 'foolwei-code.github.io',
+    owner: 'foolwei-code',
+    admin: ['foolwei-code'],
+    id: eval("location.pathname"), 
     distractionFreeMode: false 
   });
   (function() {

@@ -33,3 +33,23 @@ pygmentsUseClasses = true
 [caches]
  [caches.images]
   dir = ':cacheDir/images'
+
+lastmod = true
+
+[frontmatter]
+  lastmod = ["lastmod", ":fileModTime", ":default"]
+
+enableGitalk = true
+
+[params.gitalk]
+  clientID = "Ov23lizw2fjqfY43cIRI"
+  clientSecret = "b3f538832e3306c84cd3dd5aa1275c4bb8488120"
+  repo = "foolwei-code.github.io"
+  owner = "foolwei-code"
+  admin = "foolwei-code"
+  id = "location.pathname"
+  labels = "gitalk"
+  perPage = 30
+  pagerDirection = "last"
+  createIssueManually = true
+  distractionFreeMode = false
