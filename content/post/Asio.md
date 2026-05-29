@@ -124,5 +124,219 @@ int main(int argc, const char* argv[]) {
 }
 ```
 
+### 3.Timer.3 - Bind the parameters to the completion handler
+
+```c++
+#include<iostream>
+#include<functional>
+#include<boost/asio.hpp>
+void print(const boost::system::error_code&, boost::asio::steady_timer& t, uint32_t& count) {
+	if (count < 5) {
+		std::cout << count << std::endl;
+		count++;
+		//将定时时间在原有的基础上增加1s
+		t.expires_at(t.expiry() + boost::asio::chrono::seconds(1));
+		//异步注册
+		t.async_wait(std::bind(&print, boost::asio::placeholders::error, std::ref(t), std::ref(count)));
+	}
+
+}
+int main(int argc, const char* argv[]) {
+	//1.创建io上下文
+	boost::asio::io_context io;
+	uint32_t count = 0;
+	boost::asio::steady_timer t{ io,boost::asio::chrono::seconds(1) };
+	t.async_wait(std::bind(print, boost::asio::placeholders::error, std::ref(t), std::ref(count)));
+	io.run();
+	std::cout << "The Final count is:" << count << std::endl;
+}
+```
+
+### 4.Timer.4 - Use member functions as the completion handler
+
+```c++
+#include<iostream>
+#include<functional>
+#include<boost/asio.hpp>
+class printer {
+public:
+	printer(boost::asio::io_context& io) :timer_(io, boost::asio::chrono::seconds(1)), count_(0) {
+		timer_.async_wait(std::bind(&printer::print,this));
+	}
+	~printer() {
+		std::cout << "The Final number is :" << count_ << std::endl;
+	}
+	void print() {
+		if (count_ < 5) {
+			std::cout << count_ << std::endl;
+			count_++;
+			timer_.expires_at(timer_.expiry() + boost::asio::chrono::seconds(1));
+			timer_.async_wait(std::bind(&printer::print, this));
+		}
+	}
+private:
+	boost::asio::steady_timer timer_;
+	uint32_t count_;
+};
+int main(int argc, const char* argv[]) {
+    //创建一个io上下文
+	boost::asio::io_context io;
+    //创建printer对象
+	printer p{ io };
+	io.run();
+}
+```
+
+### 5.Timer.5 - Synchronously complete the processor in a multithreaded program
+
+```c++
+#include<iostream>
+#include<functional>
+#include<boost/asio.hpp>
+#include<thread>
+class printer {
+public:
+	printer(boost::asio::io_context&io):strand_(boost::asio::make_strand(io)),
+		timer1_(io,boost::asio::chrono::seconds(1)),
+		timer2_(io,boost::asio::chrono::seconds(1)),
+		count_(0){ 
+		timer1_.async_wait(boost::asio::bind_executor(strand_, std::bind(&printer::print1, this)));
+		timer2_.async_wait(boost::asio::bind_executor(strand_, std::bind(&printer::print2, this)));
+	}
+	~printer() {
+		std::cout << "The Final count is:" << count_ << std::endl;
+	}
+	void print1() {
+		if (count_ < 10) {
+			std::cout << "Timer1:" << count_ << std::endl;
+			count_++;
+			timer1_.expires_at(timer1_.expiry() + boost::asio::chrono::seconds(1));
+
+			timer1_.async_wait(boost::asio::bind_executor(strand_,
+				std::bind(&printer::print1, this)));
+
+		}
+	}
+	void print2() {
+		if (count_ < 10)
+		{
+			std::cout << "Timer 2: " << count_ << std::endl;
+			++count_;
+
+			timer2_.expires_at(timer2_.expiry() + boost::asio::chrono::seconds(1));
+
+			timer2_.async_wait(boost::asio::bind_executor(strand_,
+				std::bind(&printer::print2, this)));
+		}
+	}
+private:
+	boost::asio::strand<boost::asio::io_context::executor_type>strand_;
+	boost::asio::steady_timer timer1_;
+	boost::asio::steady_timer timer2_;
+	uint32_t count_;
+};
+int main(int argc, const char* argv[]) {
+	boost::asio::io_context io;
+	printer p(io);
+	std::thread t([&] { io.run(); });
+	io.run();
+	t.join();
+}
+```
+
+## 2.Introduction to Sockets
+
+***本节的教程程序展示如何使用 Asio 开发简单的客户端和服务器程序。这些教程程序围绕 [daytime](http://www.ietf.org/rfc/rfc867.txt) 协议实现，该协议同时支持 TCP 和 UDP。***
+
+### TCP
+
+#### 1.Daytime.1 - A Synchronous TCP daytime client
+
+```c++
+#include<array>
+#include<iostream>
+#include<boost/asio.hpp>
+using boost::asio::ip::tcp;
+int main(int argc, const char* argv[]) {
+	try {
+		if (argc != 2) {
+			std::cerr << "Usage:client<host>" << std::endl;
+			return -1;
+		}
+		//1.创建上下文
+		boost::asio::io_context ioContext_;
+		//2.创建解析器
+		tcp::resolver resolver_{ ioContext_ };
+		//3.创建服务端的endpoint,它相当于传统网络编程中的struct sockaddr
+		tcp::resolver::results_type endpoints{ resolver_.resolve(argv[1],"daytime") };
+		//4.根据io_context创建socket
+		tcp::socket socket_{ ioContext_ };
+		//将endpoint绑定到socket上，进行连接
+		boost::asio::connect(socket_, endpoints);
+		while (true) {
+			std::array<char, 128>buf;
+			boost::system::error_code error;
+			//5.相当于传统网络编程中的recv/read
+			std::size_t len = socket_.read_some(boost::asio::buffer(buf), error);
+			if (error == boost::asio::error::eof) {
+				break;
+			}
+			else if (error) {
+				throw boost::system::system_error(error);
+			}
+			//6.相当于传统网络编程中的send/write
+			std::cout.write(buf.data(), len);
+		}
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+}
+```
+
+#### 2.Daytime time.2 - A synchronous TCP daytime time server
+
+```c++
+#include<array>
+#include<iostream>
+#include<boost/asio.hpp>
+#include<ctime>
+using boost::asio::ip::tcp;
+std::string makeDaytimeString(){
+	std::time_t now=time(0);
+    return ctime(&now);
+}
+int main(int argc, const char* argv[]) {
+	try {
+		//1.创建上下文
+		boost::asio::io_context ioContext_;
+		//2.创建一个接收器，相当于把传统网络编程中的socket,struct sokckaddr,bind,listen所做的事情都做了
+		tcp::acceptor acceptor_{ ioContext_,tcp::endpoint(tcp::v4(),13) };  //localhost+port:13
+		while (true) {
+			//3.相当于传统网络编程中的accept,这个socket_就是connectFd_
+			tcp::socket socket_{ ioContext_ };
+			acceptor_.accept(socket_);
+			std::string message{ makeDaytimeString() };
+			boost::system::error_code ec_;
+			boost::asio::write(socket_, boost::asio::buffer(message),ec_);
+			if (ec_) {
+				throw std::runtime_error{ "write error" };
+			}
+		}
+	}
+	catch (const std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
+}
+```
+
+
+
+
+
+
+
+
+
 
 
