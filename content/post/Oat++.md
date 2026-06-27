@@ -47,7 +47,7 @@ $ cmake --build . --target INSTALL
 
 * 总体架构
 
-```
+```apl
 客户端请求
     ↓
 ConnectionProvider（监听 8000，接收 TCP 连接）
@@ -61,8 +61,8 @@ Router（根据 URL 找到对应 API）
 返回响应 → 发给客户端
 ```
 
-```
-客户端 Browser / Postman
+```apl
+客户端 Browser / Postman /Apifox
         │
         ▼
 ┌─────────────────────────────┐

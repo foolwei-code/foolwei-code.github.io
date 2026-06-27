@@ -127,28 +127,33 @@ int main(int argc, const char* argv[]) {
 ### 3.Timer.3 - Bind the parameters to the completion handler
 
 ```c++
-#include<iostream>
-#include<functional>
-#include<boost/asio.hpp>
-void print(const boost::system::error_code&, boost::asio::steady_timer& t, uint32_t& count) {
-	if (count < 5) {
-		std::cout << count << std::endl;
-		count++;
-		//将定时时间在原有的基础上增加1s
-		t.expires_at(t.expiry() + boost::asio::chrono::seconds(1));
-		//异步注册
-		t.async_wait(std::bind(&print, boost::asio::placeholders::error, std::ref(t), std::ref(count)));
-	}
+#include <boost/asio.hpp>
+#include <iostream>
 
+void print(const boost::system::error_code & /*e*/,
+           boost::asio::steady_timer *t, int *count) {
+  if (*count < 5) {
+    std::cout << *count << std::endl;
+    ++(*count);
+
+    t->expires_at(t->expiry() + boost::asio::chrono::seconds(1));
+    t->async_wait([t, count](const boost::system::error_code &ec) {
+      print(ec, t, count);
+    });
+  }
 }
-int main(int argc, const char* argv[]) {
-	//1.创建io上下文
-	boost::asio::io_context io;
-	uint32_t count = 0;
-	boost::asio::steady_timer t{ io,boost::asio::chrono::seconds(1) };
-	t.async_wait(std::bind(print, boost::asio::placeholders::error, std::ref(t), std::ref(count)));
-	io.run();
-	std::cout << "The Final count is:" << count << std::endl;
+
+int main() {
+  boost::asio::io_context io;
+  int count = 0;
+  boost::asio::steady_timer t(io, boost::asio::chrono::seconds(1));
+  t.async_wait([&t, &count](const boost::system::error_code &ec) {
+    print(ec, &t, &count);
+  });
+
+  io.run();
+  std::cout << "Final count is " << count << std::endl;
+  return 0;
 }
 ```
 
@@ -327,10 +332,8 @@ int main(int argc, const char* argv[]) {
 	catch (const std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
-}
+
 ```
-
-
 
 
 

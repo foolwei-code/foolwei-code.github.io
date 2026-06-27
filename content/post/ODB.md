@@ -96,7 +96,7 @@ odb --std c++20 -d mysql --generate-query --generate-schema student.hxx
 
 ```c++
 #include "student-odb.hxx"
-#include "student.hpp"
+#include "student.hxx"
 #include <exception>
 #include <iostream>
 #include <memory>
